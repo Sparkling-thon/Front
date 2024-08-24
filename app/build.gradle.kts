@@ -57,4 +57,5 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.android.gms:play-services-maps:18.0.2") // 최신 버전 확인
+    implementation("com.google.android.gms:play-services-location:21.0.1") // 최신 버전 확인
 }
