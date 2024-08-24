@@ -17,7 +17,12 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <!-- Google Maps API Key -->
+        <activity
+            android:name=".ui.dashboard.DetailFragmentManage"
+            android:exported="false" />
+        <activity
+            android:name=".ui.dashboard.DetailFragment"
+            android:exported="false" /> <!-- Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCZalRPiPlpe4cHU923zuOLl2Yb8sj7OMM" />

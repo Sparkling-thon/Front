@@ -8,8 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sparkling_frontend.R
 import com.example.sparkling_frontend.model.ReservationItem
 
-class CollectionHistoryAdapter(private val items: List<ReservationItem>) :
-    RecyclerView.Adapter<CollectionHistoryAdapter.CollectionHistoryViewHolder>() {
+class CollectionHistoryAdapter(
+    private val items: List<ReservationItem>,
+    private val itemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<CollectionHistoryAdapter.CollectionHistoryViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(item: ReservationItem)
+    }
 
     class CollectionHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvDate: TextView = view.findViewById(R.id.tv_date)
@@ -29,6 +35,11 @@ class CollectionHistoryAdapter(private val items: List<ReservationItem>) :
         holder.tvStatus.text = if (item.isCompleted) "수거 완료" else "수거 중"
         holder.tvTotalItems.text = "총 ${item.powderQuantity + item.generalQuantity + item.professionalQuantity + item.liquidQuantity + item.ointmentQuantity}개"
         holder.tvDetail.text = "가루약 ${item.powderQuantity}개\n알약 ${item.professionalQuantity}개\n물약 ${item.liquidQuantity}개"
+
+        // 아이템 클릭 리스너 설정
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(item)
+        }
     }
 
     override fun getItemCount() = items.size
