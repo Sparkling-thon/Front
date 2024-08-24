@@ -22,7 +22,8 @@
             android:paddingStart="25dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/yellow" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,6 +91,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="30dp"
+        android:background="@drawable/custom_color_button"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

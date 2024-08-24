@@ -49,7 +49,7 @@ class ChooseAddressActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Toast.makeText(this@ChooseAddressActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
                         // TODO: 회원가입 성공 후 다음 화면으로 이동 처리
-                        val intent = Intent(this@ChooseAddressActivity, LoginActivity::class.java)
+                        val intent = Intent(this@ChooseAddressActivity, FinishRegisterActivity::class.java)
                         startActivity(intent)
                     } else {
                         Toast.makeText(this@ChooseAddressActivity, "회원가입 실패: ${response.code()}", Toast.LENGTH_SHORT).show()
