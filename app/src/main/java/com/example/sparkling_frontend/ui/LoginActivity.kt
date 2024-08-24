@@ -1,15 +1,18 @@
 package com.example.sparkling_frontend.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.sparkling_frontend.MainActivity
 import com.example.sparkling_frontend.R
 import com.example.sparkling_frontend.api.RetrofitClient
 import com.example.sparkling_frontend.model.LoginRequest
 import com.example.sparkling_frontend.model.LoginResponse
+import com.example.sparkling_frontend.util.PreferenceManager
 import retrofit2.Response
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,6 +37,13 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val registerButton = findViewById<Button>(R.id.register)
+
+        registerButton.setOnClickListener {
+            val intent = Intent(this@LoginActivity, ChooseRoleActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loginUser(email: String, password: String) {
@@ -45,7 +55,17 @@ class LoginActivity : AppCompatActivity() {
                     loginResponse?.let {
                         // 로그인 성공 처리
                         Toast.makeText(this@LoginActivity, "로그인 성공: ${it.authType}", Toast.LENGTH_SHORT).show()
-                        // TODO: 토큰 저장 및 다음 화면으로 이동
+
+                        // 토큰 저장
+                        it.token.let { token ->
+                            PreferenceManager.saveAuthToken(this@LoginActivity, token)
+                        }
+                        it.authType.let { authType ->
+                            PreferenceManager.saveAuthType(this@LoginActivity, authType)
+                        }
+
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
                     }
                 } else {
                     // 로그인 실패 처리
