@@ -1,5 +1,6 @@
 package com.example.sparkling_frontend.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -33,6 +34,13 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val registerButton = findViewById<Button>(R.id.register)
+
+        registerButton.setOnClickListener {
+            val intent = Intent(this@LoginActivity, ChooseRoleActivity::class.java)
+            startActivity(intent)
         }
     }
 
