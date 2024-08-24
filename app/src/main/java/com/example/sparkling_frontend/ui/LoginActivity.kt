@@ -12,6 +12,7 @@ import com.example.sparkling_frontend.R
 import com.example.sparkling_frontend.api.RetrofitClient
 import com.example.sparkling_frontend.model.LoginRequest
 import com.example.sparkling_frontend.model.LoginResponse
+import com.example.sparkling_frontend.util.PreferenceManager
 import retrofit2.Response
 import retrofit2.Call
 import retrofit2.Callback
@@ -54,8 +55,14 @@ class LoginActivity : AppCompatActivity() {
                     loginResponse?.let {
                         // 로그인 성공 처리
                         Toast.makeText(this@LoginActivity, "로그인 성공: ${it.authType}", Toast.LENGTH_SHORT).show()
-                        // TODO: 토큰 저장 및 다음 화면으로 이동
 
+                        // 토큰 저장
+                        it.token.let { token ->
+                            PreferenceManager.saveAuthToken(this@LoginActivity, token)
+                        }
+                        it.authType.let { authType ->
+                            PreferenceManager.saveAuthType(this@LoginActivity, authType)
+                        }
 
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent)
