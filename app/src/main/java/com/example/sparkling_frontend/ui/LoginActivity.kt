@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.sparkling_frontend.MainActivity
 import com.example.sparkling_frontend.R
 import com.example.sparkling_frontend.api.RetrofitClient
 import com.example.sparkling_frontend.model.LoginRequest
@@ -54,6 +55,10 @@ class LoginActivity : AppCompatActivity() {
                         // 로그인 성공 처리
                         Toast.makeText(this@LoginActivity, "로그인 성공: ${it.authType}", Toast.LENGTH_SHORT).show()
                         // TODO: 토큰 저장 및 다음 화면으로 이동
+
+
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
                     }
                 } else {
                     // 로그인 실패 처리

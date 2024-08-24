@@ -38,8 +38,8 @@ class ChooseRoleActivity : AppCompatActivity() {
         // "다음" 버튼 클릭 리스너 설정
         buttonGoToRegisterName.setOnClickListener {
             val selectedRole = when {
-                checkBoxServiceUser.isChecked -> "이용자"
-                checkBoxCollector.isChecked -> "수거자"
+                checkBoxServiceUser.isChecked -> "ROLE_USER"
+                checkBoxCollector.isChecked -> "ROLE_COLLECTOR"
                 else -> null
             }
 
