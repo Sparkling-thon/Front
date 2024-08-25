@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sparkling-Frontend</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="back_button_description">Back button</string> <!-- 추가된 문자열 리소스 -->
 </resources>
