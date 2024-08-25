@@ -31,7 +31,29 @@
         android:id="@+id/applyCollectionFragment"
         android:name="com.example.sparkling_frontend.ui.home.ApplycollectionFragment"
         android:label="ApplyCollectionFragment"
-        tools:layout="@layout/fragment_applycollection" />
+        tools:layout="@layout/fragment_applycollection">
+        <action
+            android:id="@+id/action_applyCollectionFragment_to_optionSelectFragment"
+            app:destination="@id/optionSelectFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/optionSelectFragment"
+        android:name="com.example.sparkling_frontend.ui.home.OptionSelectFragment"
+        android:label="OptionSelectFragment"
+        tools:layout="@layout/optionselect">
+        <!-- 액션 제거됨, 직접적으로 ApplyInfoFragment로 이동하도록 설정 -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/applyInfoFragment"
+        android:name="com.example.sparkling_frontend.ui.home.ApplyInfoFragment"
+        android:label="ApplyInfoFragment"
+        tools:layout="@layout/applyinfo">
+        <action
+            android:id="@+id/action_applyInfoFragment_to_applySuccessFragment"
+            app:destination="@id/applySuccessFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/collectionMapFragment"
@@ -50,5 +72,10 @@
         android:name="com.example.sparkling_frontend.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/applySuccessFragment"
+        android:name="com.example.sparkling_frontend.ui.home.ApplySuccessFragment"
+        android:label="ApplySuccessFragment"
+        tools:layout="@layout/apply_success" />
 
 </navigation>

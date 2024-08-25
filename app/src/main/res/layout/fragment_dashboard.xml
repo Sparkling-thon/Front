@@ -78,5 +78,4 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:listitem="@layout/collect_history" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
