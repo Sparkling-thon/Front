@@ -31,8 +31,12 @@ class CollectionHistoryAdapter(
 
     override fun onBindViewHolder(holder: CollectionHistoryViewHolder, position: Int) {
         val item = items[position]
-        holder.tvDate.text = item.completeDate
-        holder.tvStatus.text = if (item.isCompleted) "수거 완료" else "수거 중"
+
+        // 날짜 형식 변환: T 이전의 부분만 가져오기
+        val dateOnly = item.completeDate.split("T")[0]
+
+        holder.tvDate.text = dateOnly
+        holder.tvStatus.text = if (item.isCompleted) "수거 완료" else "수거 대기"
         holder.tvTotalItems.text = "총 ${item.powderQuantity + item.generalQuantity + item.professionalQuantity + item.liquidQuantity + item.ointmentQuantity}개"
         holder.tvDetail.text = "가루약 ${item.powderQuantity}개\n알약 ${item.professionalQuantity}개\n물약 ${item.liquidQuantity}개"
 
