@@ -1,5 +1,6 @@
 package com.example.sparkling_frontend.api
 
+import com.example.sparkling_frontend.model.ReservationRequest
 import com.example.sparkling_frontend.model.LoginRequest
 import com.example.sparkling_frontend.model.LoginResponse
 import com.example.sparkling_frontend.model.NearestPlaceResponse
@@ -18,11 +19,15 @@ interface ApiService {
     @POST("/api/member/join")
     fun register(@Body registerRequest: RegisterRequest): Call<Void>
 
-    // 수락된 예약을 가져오는 GET 요청
     @GET("/api/reservation/member/accepted")
     fun getAcceptedReservations(@Header("Authorization") token: String): Call<List<ReservationItem>>
 
     @POST("/api/place/nearest-places")
     fun getNearestPlaces(@Body coordinates: Map<String, Double>): Call<List<NearestPlaceResponse>>
 
+    @POST("/api/reservation")
+    fun reservation(
+        @Header("Authorization") token: String,
+        @Body reservationRequest: ReservationRequest
+    ): Call<Void>
 }
