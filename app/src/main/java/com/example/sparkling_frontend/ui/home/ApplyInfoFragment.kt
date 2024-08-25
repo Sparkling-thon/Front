@@ -25,14 +25,12 @@ class ApplyInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // applyinfo.xml 레이아웃을 인플레이트
         return inflater.inflate(R.layout.applyinfo, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // UI 요소 초기화
         timeButtons = listOf(
             view.findViewById(R.id.time_button_one),
             view.findViewById(R.id.time_button_two),
@@ -44,14 +42,11 @@ class ApplyInfoFragment : Fragment() {
         selectDateButton = view.findViewById(R.id.select_date_button)
         nextButton = view.findViewById(R.id.next_button)
 
-        // 날짜 선택 버튼 클릭 리스너 설정
         selectDateButton.setOnClickListener {
             showDatePickerDialog()
         }
 
-        // 다음 버튼 클릭 리스너 설정
         nextButton.setOnClickListener {
-            // ApplySuccessFragment로 네비게이션
             findNavController().navigate(R.id.action_applyInfoFragment_to_applySuccessFragment)
         }
 
@@ -71,7 +66,6 @@ class ApplyInfoFragment : Fragment() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-            // 월을 0부터 시작하므로 1을 추가
             val date = Calendar.getInstance().apply {
                 set(Calendar.YEAR, selectedYear)
                 set(Calendar.MONTH, selectedMonth)

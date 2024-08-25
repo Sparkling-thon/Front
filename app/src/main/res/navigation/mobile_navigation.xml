@@ -42,7 +42,9 @@
         android:name="com.example.sparkling_frontend.ui.home.OptionSelectFragment"
         android:label="OptionSelectFragment"
         tools:layout="@layout/optionselect">
-        <!-- 액션 제거됨, 직접적으로 ApplyInfoFragment로 이동하도록 설정 -->
+        <action
+            android:id="@+id/action_optionSelectFragment_to_applyInfoFragment"
+            app:destination="@id/applyInfoFragment" />
     </fragment>
 
     <fragment
@@ -72,6 +74,7 @@
         android:name="com.example.sparkling_frontend.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/applySuccessFragment"
         android:name="com.example.sparkling_frontend.ui.home.ApplySuccessFragment"
