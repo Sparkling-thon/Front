@@ -1,5 +1,6 @@
 package com.example.sparkling_frontend.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +30,8 @@ class HomeFragment : Fragment() {
 
         // 지도 CardView 클릭 시 CollectionmapFragment로 이동
         binding.topRightBox.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_collectionMapFragment)
+            val intent = Intent(requireContext(), MapsActivity::class.java)
+            startActivity(intent)
         }
 
         // 이용방법 CardView 클릭 시 InfoFragment로 이동

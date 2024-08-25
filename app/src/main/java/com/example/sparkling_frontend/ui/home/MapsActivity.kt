@@ -1,89 +1,94 @@
 package com.example.sparkling_frontend.ui.home
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.example.sparkling_frontend.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
+import com.example.sparkling_frontend.api.RetrofitClient
+import com.example.sparkling_frontend.model.NearestPlaceResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity() {
 
-    private lateinit var mMap: GoogleMap
-    private val LOCATION_PERMISSION_REQUEST_CODE = 1
+    private lateinit var placeTextViews: List<TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_collectionboxmap)
 
-        // SupportMapFragment를 얻고, 지도가 준비되었을 때 알림을 받기 위해 콜백 설정
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // 확대/축소 버튼을 활성화
-        mMap.uiSettings.isZoomControlsEnabled = true
-
-        // KAIST 위치 설정
-        val kaistLatLng = LatLng(36.3726, 127.3606)
-
-        // KAIST 위치에 기본 마커 추가
-        mMap.addMarker(
-            MarkerOptions()
-                .position(kaistLatLng)
-                .title("Marker at KAIST")
+        // Initialize TextViews for each place
+        placeTextViews = listOf(
+            findViewById(R.id.place1_name),
+            findViewById(R.id.place1_address),
+            findViewById(R.id.place1_phone),
+            findViewById(R.id.place1_distance),
+            findViewById(R.id.place2_name),
+            findViewById(R.id.place2_address),
+            findViewById(R.id.place2_phone),
+            findViewById(R.id.place2_distance),
+            findViewById(R.id.place3_name),
+            findViewById(R.id.place3_address),
+            findViewById(R.id.place3_phone),
+            findViewById(R.id.place3_distance),
+            findViewById(R.id.place4_name),
+            findViewById(R.id.place4_address),
+            findViewById(R.id.place4_phone),
+            findViewById(R.id.place4_distance),
+            findViewById(R.id.place5_name),
+            findViewById(R.id.place5_address),
+            findViewById(R.id.place5_phone),
+            findViewById(R.id.place5_distance)
         )
 
-        // 위치 권한이 허용된 경우 현재 위치로 이동
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            enableLocation()
-        } else {
-            // 위치 권한 요청
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
-        }
+        Toast.makeText(this@MapsActivity, "Activity created", Toast.LENGTH_SHORT).show()
+
+        // Example coordinates to test API
+        val latitude = 127.3652241
+        val longitude = 36.3742901
+
+        // Call API
+        fetchNearestPlaces(latitude, longitude)
     }
 
-    private fun enableLocation() {
-        try {
-            mMap.isMyLocationEnabled = true
-            mMap.setOnMyLocationChangeListener { location ->
-                val currentLatLng = LatLng(location.latitude, location.longitude)
+    private fun fetchNearestPlaces(latitude: Double, longitude: Double) {
+        val apiService = RetrofitClient.instance
+        val requestBody = mapOf("latitude" to latitude, "longitude" to longitude)
 
-                // 현재 위치와 KAIST 위치를 포함하는 카메라 설정 (5km 범위)
-                val bounds = LatLngBounds.Builder()
-                    .include(currentLatLng)
-                    .include(LatLng(36.3726, 127.3606))
-                    .build()
+        Toast.makeText(this@MapsActivity, "API request started", Toast.LENGTH_SHORT).show()
 
-                // 5km 범위의 초기 줌 레벨을 적용
-                val padding = 100 // Padding in pixels
-                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding))
+        val call = apiService.getNearestPlaces(requestBody)
+        call.enqueue(object : Callback<List<NearestPlaceResponse>> {
+            override fun onResponse(
+                call: Call<List<NearestPlaceResponse>>,
+                response: Response<List<NearestPlaceResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val places = response.body()
+                    if (places.isNullOrEmpty()) {
+                        Toast.makeText(this@MapsActivity, "No places found", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Display each place's information in the TextViews
+                        for (i in places.indices) {
+                            val place = places[i]
+                            placeTextViews[i * 4].text = "Name: ${place.name}"
+                            placeTextViews[i * 4 + 1].text = "Address: ${place.address}"
+                            placeTextViews[i * 4 + 2].text = "Phone: ${place.phoneNumber}"
+                            placeTextViews[i * 4 + 3].text = "Distance: ${String.format("%.3f", place.distance)} km"
+                        }
+
+                        Toast.makeText(this@MapsActivity, "Places loaded successfully", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this@MapsActivity, "Failed to load places: ${response.message()}", Toast.LENGTH_SHORT).show()
+                }
             }
-        } catch (e: SecurityException) {
-            e.printStackTrace()
-        }
-    }
 
-    // 위치 권한 요청 결과 처리
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 권한이 허용되면 위치 기능 활성화
-                enableLocation()
+            override fun onFailure(call: Call<List<NearestPlaceResponse>>, t: Throwable) {
+                Toast.makeText(this@MapsActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
-        }
+        })
     }
 }

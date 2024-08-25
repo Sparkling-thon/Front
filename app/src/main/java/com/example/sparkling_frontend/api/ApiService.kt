@@ -2,6 +2,7 @@ package com.example.sparkling_frontend.api
 
 import com.example.sparkling_frontend.model.LoginRequest
 import com.example.sparkling_frontend.model.LoginResponse
+import com.example.sparkling_frontend.model.NearestPlaceResponse
 import com.example.sparkling_frontend.model.RegisterRequest
 import com.example.sparkling_frontend.model.ReservationItem
 import retrofit2.Call
@@ -20,4 +21,8 @@ interface ApiService {
     // 수락된 예약을 가져오는 GET 요청
     @GET("/api/reservation/member/accepted")
     fun getAcceptedReservations(@Header("Authorization") token: String): Call<List<ReservationItem>>
+
+    @POST("/api/place/nearest-places")
+    fun getNearestPlaces(@Body coordinates: Map<String, Double>): Call<List<NearestPlaceResponse>>
+
 }
