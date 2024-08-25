@@ -19,12 +19,12 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/top_section"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/yellow"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toTopOf="@id/bottom_section"
@@ -33,18 +33,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/status_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="start"
-                android:text="리필님은 현재 \n 새싹 등급이에요!"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="start"
+                    android:text="리필님은 현재 \n 새싹 등급이에요!"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/status_image"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.172" />
+
+                <ImageView
+                    android:id="@+id/status_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/sprout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- 하단 카드뷰 영역 -->
@@ -68,7 +91,7 @@
                 android:layout_height="310dp"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="20dp"
-                android:backgroundTint="#D3D3D3"
+                android:backgroundTint="#FFF3D2"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -77,14 +100,39 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5">
 
-                <TextView
-                    android:id="@+id/left_box_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="수거 신청"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/left_box_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_marginStart="20dp"
+                        android:paddingStart="10dp"
+                        android:text="수거 신청"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/left_box_image"
+                        app:layout_constraintHorizontal_bias="0.16"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.058" />
+
+                    <ImageView
+                        android:id="@+id/left_box_image"
+                        android:layout_width="75dp"
+                        android:layout_height="100dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/truck"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -101,7 +149,7 @@
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_margin="10dp"
-                    android:backgroundTint="#D3D3D3"
+                    android:backgroundTint="#FFF3D2"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toTopOf="@id/bottom_right_box"
@@ -110,14 +158,37 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/top_right_box_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="지도"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/top_right_box_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:text="지도"
+                            android:textColor="#000000"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/top_right_box_image"
+                            app:layout_constraintHorizontal_bias="0.516"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.148" />
+
+                        <ImageView
+                            android:id="@+id/top_right_box_image"
+                            android:layout_width="75dp"
+                            android:layout_height="58dp"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/map"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -125,7 +196,7 @@
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_margin="10dp"
-                    android:backgroundTint="#D3D3D3"
+                    android:backgroundTint="#FFF3D2"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -133,19 +204,40 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/top_right_box">
 
-                    <TextView
-                        android:id="@+id/bottom_right_box_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="이용방법"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/bottom_right_box_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:layout_marginStart="20dp"
+                            android:text="이용방법"
+                            android:textColor="#000000"
+                            android:textSize="22sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/bottom_right_box_image"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.148" />
+
+                        <ImageView
+                            android:id="@+id/bottom_right_box_image"
+                            android:layout_width="61dp"
+                            android:layout_height="59dp"
+                            android:layout_marginEnd="4dp"
+                            android:src="@drawable/sprout"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
