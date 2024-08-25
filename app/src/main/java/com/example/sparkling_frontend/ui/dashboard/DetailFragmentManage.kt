@@ -1,6 +1,7 @@
 package com.example.sparkling_frontend.ui.dashboard
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sparkling_frontend.R
 import com.example.sparkling_frontend.model.ReservationItem

@@ -40,18 +40,19 @@ class DetailFragment : Fragment() {
 
         // reservationItem 데이터를 이용해 UI 업데이트
         reservationItem?.let { item ->
-            view.findViewById<TextView>(R.id.tv_detail_id).text = "ID: ${item.id}"
-            view.findViewById<TextView>(R.id.tv_detail_member_name).text = "회원 이름: ${item.memberName}"
-            view.findViewById<TextView>(R.id.tv_detail_collector_name).text = "수거자 이름: ${item.collectorName}"
-            view.findViewById<TextView>(R.id.tv_detail_complete_date).text = "완료 날짜: ${item.completeDate}"
-            view.findViewById<TextView>(R.id.tv_detail_powder_quantity).text = "가루약 수량: ${item.powderQuantity}개"
-            view.findViewById<TextView>(R.id.tv_detail_general_quantity).text = "일반의약품 수량: ${item.generalQuantity}개"
-            view.findViewById<TextView>(R.id.tv_detail_professional_quantity).text = "전문의약품 수량: ${item.professionalQuantity}개"
-            view.findViewById<TextView>(R.id.tv_detail_liquid_quantity).text = "액체약 수량: ${item.liquidQuantity}개"
-            view.findViewById<TextView>(R.id.tv_detail_ointment_quantity).text = "연고약 수량: ${item.ointmentQuantity}개"
-            view.findViewById<TextView>(R.id.tv_detail_is_completed).text = "완료 여부: ${if (item.isCompleted) "완료됨" else "미완료"}"
-            view.findViewById<TextView>(R.id.tv_detail_reservation_date).text = "예약 날짜: ${item.reservationDate}"
-            view.findViewById<TextView>(R.id.tv_detail_address).text = "주소: ${item.address}"
+//            view.findViewById<TextView>(R.id.tv_detail_id).text = "ID: ${item.id}"
+//            view.findViewById<TextView>(R.id.tv_detail_member_name).text = "회원 이름: ${item.memberName}"
+//            view.findViewById<TextView>(R.id.tv_detail_collector_name).text = "수거자 이름: ${item.collectorName}"
+            view.findViewById<TextView>(R.id.tv_detail_complete_date).text = "${item.completeDate.split("T")[0]}"
+            view.findViewById<TextView>(R.id.tv_detail_powder_quantity).text = "${item.powderQuantity}개"
+            view.findViewById<TextView>(R.id.tv_detail_general_quantity).text = "${item.generalQuantity}개"
+            view.findViewById<TextView>(R.id.tv_detail_professional_quantity).text = "${item.professionalQuantity}개"
+            view.findViewById<TextView>(R.id.tv_detail_liquid_quantity).text = "${item.liquidQuantity}개"
+            view.findViewById<TextView>(R.id.tv_detail_ointment_quantity).text = "${item.ointmentQuantity}개"
+            view.findViewById<TextView>(R.id.tv_detail_is_completed).text = "${if (item.isCompleted) " 수거 완료되었어요" else " 수거 대기 중이에요"}"
+            view.findViewById<TextView>(R.id.tv_detail_reservation_date).text = "${item.reservationDate.split("T")[0]}"
+            view.findViewById<TextView>(R.id.tv_detail_address).text = "${item.address}"
+            view.findViewById<TextView>(R.id.total).text = "${item.powderQuantity + item.generalQuantity + item.professionalQuantity + item.liquidQuantity + item.ointmentQuantity}개"
         }
 
         return view

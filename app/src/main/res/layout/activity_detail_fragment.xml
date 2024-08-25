@@ -5,135 +5,417 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- ID -->
-    <TextView
-        android:id="@+id/tv_detail_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID: 1"
-        android:textSize="16sp"
+    <!-- NestedScrollView로 스크롤 가능 영역 설정 -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!-- Member Name -->
-    <TextView
-        android:id="@+id/tv_detail_member_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원 이름: 임지민"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_id"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Collector Name -->
-    <TextView
-        android:id="@+id/tv_detail_collector_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수거자 이름: test"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_member_name"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+        <!-- ScrollView 내부의 콘텐츠를 감싸는 LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <!-- Complete Date -->
-    <TextView
-        android:id="@+id/tv_detail_complete_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="완료 날짜: 2024-08-25T05:11:39.506350"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_collector_name"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+            <!-- Top Bar를 감싸는 ConstraintLayout -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp">
 
-    <!-- Powder Quantity -->
-    <TextView
-        android:id="@+id/tv_detail_powder_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="가루약 수량: 3"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_complete_date"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+                <ImageView
+                    android:id="@+id/backArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_back_ios_new_24"
+                    android:paddingStart="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:tint="@color/yellow" />
 
-    <!-- General Quantity -->
-    <TextView
-        android:id="@+id/tv_detail_general_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="일반의약품 수량: 3"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_powder_quantity"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수거 내역 상세"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Professional Quantity -->
-    <TextView
-        android:id="@+id/tv_detail_professional_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전문의약품 수량: 3"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_general_quantity"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+            <!-- 수평선을 추가하여 구분 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp" />
 
-    <!-- Liquid Quantity -->
-    <TextView
-        android:id="@+id/tv_detail_liquid_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="액체약 수량: 3"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_professional_quantity"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+            <!-- 예시 텍스트 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                >
+                <TextView
+                    android:id="@+id/tv_detail_complete_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="asdfasdf"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="16dp" />
+                <TextView
+                    android:id="@+id/tv_detail_is_completed"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 수거 완료되었어요"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_marginBottom="16dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <View
+                        android:layout_marginRight="5dp"
+                        android:layout_width="120dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/rounded_bar"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="접수 중"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <View
+                        android:layout_marginRight="5dp"
+                        android:layout_width="120dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/rounded_bar"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="수거 대기"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <View
+                        android:layout_marginRight="5dp"
+                        android:layout_width="120dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/rounded_no_bar"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="수거 완료"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#F0F1F4"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp" />
 
-    <!-- Ointment Quantity -->
-    <TextView
-        android:id="@+id/tv_detail_ointment_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="연고약 수량: 2"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_liquid_quantity"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+            <TextView
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수거 날짜"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/tv_detail_reservation_date"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수거 날짜"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                />
 
-    <!-- Is Completed -->
-    <TextView
-        android:id="@+id/tv_detail_is_completed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="완료 여부: 미완료"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_ointment_quantity"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="품목 정보"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/black"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/fuck"
+                android:padding="15dp"
+                android:layout_marginBottom="8dp">
 
-    <!-- Reservation Date -->
-    <TextView
-        android:id="@+id/tv_detail_reservation_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="예약 날짜: 2024-08-24T15:30"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_is_completed"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+                <!-- Drug Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="가루약"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
 
-    <!-- Address -->
-    <TextView
-        android:id="@+id/tv_detail_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="주소: 주소입니다."
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_detail_reservation_date"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp" />
+                <!-- Drug Quantity -->
+                <TextView
+                    android:id="@+id/tv_detail_powder_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20개"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/fuck"
+                android:padding="15dp"
+                android:layout_marginBottom="8dp">
+
+                <!-- Drug Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="알약(전문의약품)"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
+
+                <!-- Drug Quantity -->
+                <TextView
+                    android:id="@+id/tv_detail_professional_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20개"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/fuck"
+                android:padding="15dp"
+                android:layout_marginBottom="8dp">
+
+                <!-- Drug Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="물약"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
+
+                <!-- Drug Quantity -->
+                <TextView
+                    android:id="@+id/tv_detail_liquid_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20개"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/fuck"
+                android:padding="15dp"
+                android:layout_marginBottom="8dp">
+
+                <!-- Drug Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="일반의약품"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
+
+                <!-- Drug Quantity -->
+                <TextView
+                    android:id="@+id/tv_detail_general_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20개"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/fuck"
+                android:padding="15dp"
+                android:layout_marginBottom="8dp">
+
+                <!-- Drug Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="연고약"
+                    android:textSize="15sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
+
+                <!-- Drug Quantity -->
+                <TextView
+                    android:id="@+id/tv_detail_ointment_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20개"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/ffuck"
+                android:padding="15dp"
+                android:layout_marginBottom="8dp">
+
+                <!-- Drug Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="총 개수"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:textColor="@color/black" />
+
+                <!-- Drug Quantity -->
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20개"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수거 정보"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/black"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="주소"
+                    android:textSize="16sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_detail_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주소"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="출입 방법"
+                    android:textSize="16sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="누구나 출입 가능"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="기타 사항"
+                    android:textSize="16sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="없음"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
