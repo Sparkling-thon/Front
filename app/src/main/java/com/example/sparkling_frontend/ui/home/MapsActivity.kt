@@ -10,11 +10,10 @@ import com.example.sparkling_frontend.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.MapFragment
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -25,8 +24,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_collectionboxmap)
 
-        // MapFragment를 얻고, 지도가 준비되었을 때 알림을 받기 위해 콜백 설정
-        val mapFragment = fragmentManager.findFragmentById(R.id.map) as MapFragment
+        // SupportMapFragment를 얻고, 지도가 준비되었을 때 알림을 받기 위해 콜백 설정
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
@@ -39,28 +38,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // KAIST 위치 설정
         val kaistLatLng = LatLng(36.3726, 127.3606)
 
-        // 위치 권한이 허용된 것처럼 처리하여 위치 기능을 직접 활성화
-        enableLocation(kaistLatLng)
+        // KAIST 위치에 기본 마커 추가
+        mMap.addMarker(
+            MarkerOptions()
+                .position(kaistLatLng)
+                .title("Marker at KAIST")
+        )
+
+        // 위치 권한이 허용된 경우 현재 위치로 이동
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            enableLocation()
+        } else {
+            // 위치 권한 요청
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        }
     }
 
-    private fun enableLocation(kaistLatLng: LatLng) {
+    private fun enableLocation() {
         try {
             mMap.isMyLocationEnabled = true
             mMap.setOnMyLocationChangeListener { location ->
                 val currentLatLng = LatLng(location.latitude, location.longitude)
 
-                // KAIST 위치에 커스텀 마커 추가 (marker_pharm.png 사용)
-                mMap.addMarker(
-                    MarkerOptions()
-                        .position(kaistLatLng)
-                        .title("Marker at KAIST")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pharm))
-                )
-
                 // 현재 위치와 KAIST 위치를 포함하는 카메라 설정 (5km 범위)
                 val bounds = LatLngBounds.Builder()
                     .include(currentLatLng)
-                    .include(kaistLatLng)
+                    .include(LatLng(36.3726, 127.3606))
                     .build()
 
                 // 5km 범위의 초기 줌 레벨을 적용
@@ -68,20 +71,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding))
             }
         } catch (e: SecurityException) {
-            // 위치 권한이 부족할 경우의 예외 처리
             e.printStackTrace()
         }
     }
 
-    // 위치 권한 요청 결과 처리 (테스트 시 우회)
+    // 위치 권한 요청 결과 처리
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 권한이 허용되면 지도를 다시 초기화
-                val kaistLatLng = LatLng(36.3726, 127.3606)
-                enableLocation(kaistLatLng)
+                // 권한이 허용되면 위치 기능 활성화
+                enableLocation()
             }
         }
     }
