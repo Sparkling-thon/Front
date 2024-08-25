@@ -6,13 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.ApplyInfoFragment">
 
-    <!-- 상단 고정 영역 -->
+    <!-- 새로운 상단 영역 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp">
+
+        <!-- 왼쪽 꺽쇄 버튼 -->
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="Back"
+            app:tint="@color/yellow"
+            />
+
+        <!-- 수거 신청 텍스트 -->
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수거 신청"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.456"
+            app:layout_constraintStart_toEndOf="@id/back_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 구분선 -->
+    <View
+        android:id="@+id/line_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/header_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 기존 상단 고정 영역 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -50,12 +101,11 @@
             android:text="변경"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- 구분선 -->
     <View
-        android:id="@+id/line_divider"
+        android:id="@+id/line_divider5"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"
@@ -95,6 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="선택된 날짜 및 요일"
+                android:layout_margin="10dp"
                 android:textSize="16sp" />
 
             <!-- 날짜 선택 버튼 -->
@@ -102,125 +153,83 @@
                 android:id="@+id/select_date_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="날짜 선택" />
+                android:layout_marginBottom="20dp"
+                android:text="날짜 선택"
+                android:background="@color/yellow" /> <!-- 배경색을 yellow로 설정 -->
+
 
             <!-- 구분선 -->
             <View
-                android:id="@+id/second_line_divider"
+                android:id="@+id/line_divider_2"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_layout" />
 
             <!-- 수거 시간대 텍스트 -->
             <TextView
                 android:id="@+id/collection_time_slot_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:text="수거 시간대"
                 android:textSize="18sp" />
 
-            <!-- 시간대 버튼들 -->
+            <!-- 시간대 버튼 5개 그리드 배열 -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:columnCount="2"
-                android:orientation="horizontal"
-                android:rowCount="3">
+                android:layout_gravity="start"
+                android:columnCount="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="1dp"
+                android:rowCount="5"> <!-- 왼쪽 정렬을 위해 layout_gravity를 start로 설정 -->
 
-                <!-- 첫 번째 열 -->
+                <!-- 왼쪽에 정렬된 5개 버튼 -->
                 <Button
-                    android:id="@+id/button_06_09"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    android:text="06:00~09:00" />
-
-                <Button
-                    android:id="@+id/button_09_12"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    android:text="09:00~12:00" />
+                    android:id="@+id/time_button_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_time_selector"
+                    android:text="06:00 ~ 09:00" />
 
                 <Button
-                    android:id="@+id/button_12_15"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_row="2"
-                    android:layout_column="0"
-                    android:text="12:00~15:00" />
-
-                <!-- 두 번째 열 -->
-                <Button
-                    android:id="@+id/button_15_18"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="1"
-                    android:text="15:00~18:00" />
+                    android:id="@+id/time_button_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_time_selector"
+                    android:text="09:00 ~ 12:00" />
 
                 <Button
-                    android:id="@+id/button_18_21"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_row="1"
-                    android:layout_column="1"
-                    android:text="18:00~21:00" />
-
-            </GridLayout>
-
-            <!-- 번호 버튼들 -->
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:columnCount="5"
-                android:rowCount="1">
+                    android:id="@+id/time_button_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_time_selector"
+                    android:text="12:00 ~ 15:00" />
 
                 <Button
-                    android:id="@+id/button_1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:text="1" />
+                    android:id="@+id/time_button_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_time_selector"
+                    android:text="15:00 ~ 18:00" />
 
                 <Button
-                    android:id="@+id/button_2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:text="2" />
-
-                <Button
-                    android:id="@+id/button_3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:text="3" />
-
-                <Button
-                    android:id="@+id/button_4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="3"
-                    android:text="4" />
-
-                <Button
-                    android:id="@+id/button_5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="4"
-                    android:text="5" />
-
+                    android:id="@+id/time_button_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_time_selector"
+                    android:text="18:00 ~ 21:00" />
             </GridLayout>
 
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
     <Button

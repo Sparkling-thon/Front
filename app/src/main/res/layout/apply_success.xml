@@ -25,7 +25,7 @@
         android:layout_marginBottom="30dp"
         android:background="@color/yellow"
         android:shadowRadius="10"
-        android:text="다음"
+        android:text="완료하기"
         android:textSize="50px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
